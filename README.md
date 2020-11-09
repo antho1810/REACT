@@ -1,10 +1,10 @@
 # CREACION DE TU REACT APP
  Abres administrador de tu consola y pones:
- 1. npm create-react-app listareact
+ 1. create-react-app listareact
  2. cd listareact
  3. npm install react-router-dom
  4. npm install --save axios 
-
+ 5. No cierren la consola, la utilizaremos en al final
 
 
 ## Creaciones
@@ -13,7 +13,7 @@ Abres el proyecto en tu editor de texto favorito. Sigue el siguiente orden:
 1. Dentro de la carpeta src, crearas una carpeta llamada 'pages'
 2. Dentro de la carpeta pages, crearas dos hojas .js llamadas Poke.js y Stars.js
 3. Regresas a la carpeta src y crearas una carpeta llamada 'components'
-4. Dentro de la carpeta components, crearas 3 hojas .js llamadas Navbar.js, Pokemon.js y Starswars.js
+4. Dentro de la carpeta components, crearas 3 hojas .js llamadas Navbar.js, Pokemon.js y Startswars.js
 
 ### Modificaciones
 Index.html
@@ -190,8 +190,6 @@ import {Link} from 'react-router-dom'
 
 
 ## Inicializar
-Ahora de ultimo ponemos la app a iniciar, para hacerlo nos vamos al administrador de la consola y poner `npm start`
+Ahora de ultimo ponemos la app a iniciar, para hacerlo nos vamos al administrador de la consola y ponemos `npm start` para iniciar la aplicación.
 
-
-### `npm run build`
 
