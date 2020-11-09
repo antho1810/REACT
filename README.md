@@ -1,70 +1,197 @@
-# Getting Started with Create React App
+# CREACION DE TU REACT APP
+ Abres administrador de tu consola y pones:
+ 1. npm create-react-app listareact
+ 2. cd listareact
+ 3. npm install react-router-dom
+ 4. npm install --save axios 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+## Creaciones
 
-### `npm start`
+Abres el proyecto en tu editor de texto favorito. Sigue el siguiente orden:
+1. Dentro de la carpeta src, crearas una carpeta llamada 'pages'
+2. Dentro de la carpeta pages, crearas dos hojas .js llamadas Poke.js y Stars.js
+3. Regresas a la carpeta src y crearas una carpeta llamada 'components'
+4. Dentro de la carpeta components, crearas 3 hojas .js llamadas Navbar.js, Pokemon.js y Starswars.js
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Modificaciones
+Index.html
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-### `npm test`
+    <title>React App</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    
+  </body>
+</html>
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+App.js
+```
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import './App.css';
+import Poke from './pages/Poke';
+import Stars from './pages/Stars';
+import Navbar from './components/Navbar';
+
+function App() {
+  return (
+    <Router>
+      <Navbar />
+
+      <Route exact path="/Poke" component={Poke} />
+      <Route exact path="/Stars" component={Stars} />
+
+    </Router>
+  );
+}
+
+export default App;
+
+```
+
+Poke.js
+```
+import React, { useEffect, useState } from "react";
+import Pokemon from "../components/Pokemon";
+const axios1 = require('axios');
+
+
+const Poke = () => {
+    
+    const [arrPokemones,setArrPokemones] = useState([]);
+    
+    console.log('[Renderización]');
+    useEffect(() => {
+        axios1.get('https://pokeapi.co/api/v2/pokemon/').then(res => {
+            setArrPokemones(res.data.results);
+        }).catch(err => {
+            console.log(err);
+        })
+    }, [])
+
+    return (
+        <div>
+            <h1>Componente Pokemon:</h1>
+            {arrPokemones.map(personaje => <Pokemon name={personaje.name}/>)}
+        </div>
+    );
+}
+
+export default Poke;
+
+
+```
+
+Stars.js
+```
+import React, { useEffect, useState } from "react";
+import Starswars from "../components/Startswars";
+const axios1 = require('axios');
+
+
+const Stars = () => {
+    
+    const [arrStars,setArrStars] = useState([]);
+    
+    console.log('[Renderización]');
+    useEffect(() => {
+        axios1.get('https://swapi.dev/api/people/').then(res => {
+            setArrStars(res.data.results);
+        }).catch(err => {
+            console.log(err);
+        })
+    }, [])
+
+    return (
+        <div>
+            <h1>Componente Starswars:</h1>
+            {arrStars.map(personaje => <Starswars name={personaje.name} height={personaje.height} />)}
+        </div>
+    );
+}
+
+export default Stars;
+```
+
+Pokemon.js
+```
+import React from 'react';
+
+// const Pokemon = (props) => {const {name} = props;}
+const Pokemon = ({ name }) => {
+    return <div><h3>Pokemón: </h3><p>{name}</p> </div>
+}
+
+export default Pokemon;
+```
+
+Startswars.js
+```
+import React from 'react';
+
+// const Pokemon = (props) => {const {name} = props;}
+const Starswars = ({ name, height }) => {
+    return <div><h3>Star Wars: </h3><p>{name}</p> <p>{height}</p></div>
+}
+
+export default Starswars;
+```
+
+Navbar.js
+```
+import React from 'react'
+import {Link} from 'react-router-dom'
+
+ function Navbar() {
+        return (
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a className="navbar-brand" href="/Poke">Lista React</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/Poke">Poke</Link>
+                        </li>
+                        <li className="nav-item">
+                        <Link className="nav-link" to="/Stars">Stars</Link>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+        )
+    }
+    export default Navbar;
+```
+
+
+## Inicializar
+Ahora de ultimo ponemos la app a iniciar, para hacerlo nos vamos al administrador de la consola y poner `npm start`
+
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
