@@ -1,5 +1,5 @@
 # CREACION DE TU REACT APP
- Abres administrador de tu consola y pones:
+ Abres el administrador de la consola y pones:
  1. create-react-app listareact
  2. cd listareact
  3. npm install react-router-dom
